@@ -2,7 +2,12 @@
 #define _DRIVER_I2C_SSD1306_H_
 
 #include <stdint.h>
+#include <stdbool.h>
 
+#define GOTO_ERROR_NON_SUCCESS(success) \
+do {                                \
+    if (!(success)) goto error ;    \
+} while (0)
 
 
 //--------------------------------- Register GPIO B
@@ -32,7 +37,13 @@
 #define I2C1_TRISE (*(volatile uint32_t*)(I2C_BASE + 0x20))
 
 void init_i2c(void) ;
-void i2c_write_cmd(uint8_t cmd);
-void i2c_write_data(uint8_t data);
+bool i2c_write(uint32_t addr, uint8_t* data, uint32_t len);
+bool i2c_read(uint32_t addr, uint8_t* data, uint32_t len);
+
+typedef enum {
+    I2C_OK = 0,
+    I2C_ERROR_TIMEOUT,
+    I2C_ERROR_NACK
+} i2c_status_t;
 
 #endif /* _DRIVER_I2C_SSD1306_H_ */
