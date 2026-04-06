@@ -9,19 +9,14 @@
 #define GPIOB_BASE 0x40010C00
 #define GPIOB_CRL (*(volatile uint32_t *)(GPIOB_BASE + 0x00))
 
-
-
-
-
 //--------------------------------- Register RCC
-#define RCC_BASE 0x40021000
+#define RCC_BASE 0x40021000 
 // Define RCC register to enable i2c ports
 #define RCC_APB2ENR (*(volatile uint32_t *)(RCC_BASE + 0x18))
 #define RCC_APB2ENR_IOPBEN (1U << 3)
 // Define RCC register to enable i2c clock
 #define RCC_APB1ENR (*(volatile uint32_t *)(RCC_BASE + 0x1C))
 #define RCC_APB1ENR_I2C1EN (1U << 22)
-
 
 //--------------------------------- Register I2C
 #define I2C_BASE 0x40005400
@@ -36,9 +31,8 @@
 #define I2C1_CCR (*(volatile uint32_t*)(I2C_BASE + 0x1C))
 #define I2C1_TRISE (*(volatile uint32_t*)(I2C_BASE + 0x20))
 
-
-
-
-
+void init_i2c(void) ;
+void i2c_write_cmd(uint8_t cmd);
+void i2c_write_data(uint8_t data);
 
 #endif /* _DRIVER_I2C_SSD1306_H_ */
