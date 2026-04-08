@@ -1,5 +1,4 @@
 [wokwi]
 version = 1
-firmware = 'path-to-your-firmware.hex'
-elf = 'path-to-your-firmware.elf'
-rfc2217ServerPort = 4000
+firmware = '../.pio/build/genericSTM32F103C8/firmware.bin'
+elf = '../.pio/build/genericSTM32F103C8/firmware.elf'
