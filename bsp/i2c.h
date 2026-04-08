@@ -36,14 +36,28 @@ do {                                \
 #define I2C1_CCR (*(volatile uint32_t*)(I2C_BASE + 0x1C))
 #define I2C1_TRISE (*(volatile uint32_t*)(I2C_BASE + 0x20))
 
-void init_i2c(void) ;
+void i2c_init(void) ;
 bool i2c_write(uint32_t addr, uint8_t* data, uint32_t len);
-bool i2c_read(uint32_t addr, uint8_t* data, uint32_t len);
+bool i2c_read(uint32_t addr, uint8_t* data, uint32_t size_data);
+bool i2c_is_device_ready(uint32_t addr);
+bool i2c_write_read(uint32_t addr, uint8_t* data_write, uint32_t size_write, uint8_t* data_read, uint32_t size_read);
+bool i2c_wait_flag(volatile uint32_t* register_bit, uint32_t flag_mask);
+
 
 typedef enum {
     I2C_OK = 0,
+    I2C_ERROR_BUSY,
     I2C_ERROR_TIMEOUT,
-    I2C_ERROR_NACK
+    I2C_ERROR_NACK,
+    I2C_ERROR_BUS,
+    I2C_ERROR_UNKNOWN,
 } i2c_status_t;
+
+typedef enum{
+    I2C_MASTER_TRANSMITTER,
+    I2C_MASTER_RECIVER,
+    I2C_SLAVE_TRANSMITTER,
+    I2C_SLAVE_RECIVER,
+} i2c_mode_t ;
 
 #endif /* _DRIVER_I2C_SSD1306_H_ */
